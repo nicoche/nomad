@@ -127,7 +127,7 @@ jobs:
 
   build-linux:
     needs: [get-go-version, get-product-version]
-    runs-on: [ custom, linux, xxl, 20.04 ]
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         goos: [linux]
