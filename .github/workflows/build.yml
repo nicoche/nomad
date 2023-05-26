@@ -158,10 +158,6 @@ jobs:
         run: |
           npm install -g yarn
 
-      - name: Build prerelease
-        run: make prerelease
-        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.make-prerelease == 'true' }}
-
       - name: Install Linux build utilties
         run: |
           sudo apt-get update
@@ -172,12 +168,16 @@ jobs:
             libc6-dev-i386 \
             libpcre3-dev \
             linux-libc-dev:i386
-          sudo apt-get install -y \
-            binutils-aarch64-linux-gnu \
-            binutils-arm-linux-gnueabihf \
-            gcc-aarch64-linux-gnu \
-            gcc-arm-linux-gnueabihf \
-            gcc-multilib-arm-linux-gnueabihf
+          #sudo apt-get install -y \
+          #  binutils-aarch64-linux-gnu \
+          #  binutils-arm-linux-gnueabihf \
+          #  gcc-aarch64-linux-gnu \
+          #  gcc-arm-linux-gnueabihf \
+          #  gcc-multilib-arm-linux-gnueabihf
+
+      - name: Build prerelease
+        run: make prerelease
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.make-prerelease == 'true' }}
 
       - name: Set gcc
         run: |
